@@ -86,12 +86,12 @@ PopupBase {
         verticalCenterOffset: showing ? 0 : -(dialog.height/3)
 
         Behavior on verticalCenterOffset {
-            NumberAnimation { duration: 200 }
+            NumberAnimation { duration: MaterialAnimation.dialogTransitionDuration }
         }
     }
 
     Behavior on opacity {
-        NumberAnimation { duration: 200 }
+        NumberAnimation { duration: MaterialAnimation.dialogTransitionDuration }
     }
 
     Keys.onPressed: {

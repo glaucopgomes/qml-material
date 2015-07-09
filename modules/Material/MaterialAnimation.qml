@@ -29,4 +29,9 @@ QtObject {
     id: materialAnimation
 
     property int pageTransitionDuration: 250
+    property int actionBarTransitionDuration: 200
+    property int dropDownTransitionDuration: 400
+    property int dialogTransitionDuration: 200
+    property int overlayLayerTransitionDuration: 300
+    property int overlayViewTransitionDuration: 300
 }

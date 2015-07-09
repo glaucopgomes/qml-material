@@ -182,7 +182,7 @@ Item {
             leftMargin: leftItem.show ? Units.dp(16) : -leftItem.width
 
             Behavior on leftMargin {
-                NumberAnimation { duration: 200 }
+                NumberAnimation { duration: MaterialAnimation.actionBarTransitionDuration }
             }
         }
 
@@ -195,7 +195,7 @@ Item {
         visible: opacity > 0
 
         Behavior on opacity {
-            NumberAnimation { duration: 200 }
+            NumberAnimation { duration: MaterialAnimation.actionBarTransitionDuration }
         }
 
         property bool show: backAction && backAction.visible
@@ -212,7 +212,7 @@ Item {
             rightMargin: Units.dp(16)
 
             Behavior on leftMargin {
-                NumberAnimation { duration: 200 }
+                NumberAnimation { duration: MaterialAnimation.actionBarTransitionDuration }
             }
         }
 
