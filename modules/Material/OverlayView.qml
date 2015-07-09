@@ -59,7 +59,7 @@ PopupBase {
     	NumberAnimation {
     		target: overlay
     		properties: "x,y,width,height"
-    	    duration: 300; easing.type: Easing.InOutQuad
+            duration: MaterialAnimation.overlayViewTransitionDuration; easing.type: Easing.InOutQuad
         }
     }
 
@@ -91,7 +91,7 @@ PopupBase {
 
     	Behavior on opacity {
     		NumberAnimation {
-	    		duration: 300; easing.type: Easing.InOutQuad
+                duration: MaterialAnimation.overlayViewTransitionDuration; easing.type: Easing.InOutQuad
 	        }
     	}
     }

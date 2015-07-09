@@ -144,20 +144,20 @@ PopupBase {
             NumberAnimation {
                 target: internalView
                 property: "opacity"
-                duration: 400
+                duration: MaterialAnimation.dropDownTransitionDuration
                 easing.type: Easing.InOutQuad
             }
 
             SequentialAnimation {
 
                 PauseAnimation {
-                    duration: 200
+                    duration: MaterialAnimation.dropDownTransitionDuration / 2
                 }
 
                 NumberAnimation {
                     target: internalView
                     property: "width"
-                    duration: 200
+                    duration: MaterialAnimation.dropDownTransitionDuration / 2
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -165,7 +165,7 @@ PopupBase {
             NumberAnimation {
                 target: internalView
                 property: "height"
-                duration: 400
+                duration: MaterialAnimation.dropDownTransitionDuration
                 easing.type: Easing.InOutQuad
             }
         },
@@ -177,21 +177,21 @@ PopupBase {
             NumberAnimation {
                 target: internalView
                 property: "opacity"
-                duration: 400
+                duration: MaterialAnimation.dropDownTransitionDuration
                 easing.type: Easing.InOutQuad
             }
 
             NumberAnimation {
                 target: internalView
                 property: "width"
-                duration: 200
+                duration: MaterialAnimation.dropDownTransitionDuration / 2
                 easing.type: Easing.InOutQuad
             }
 
             NumberAnimation {
                 target: internalView
                 property: "height"
-                duration: 400
+                duration: MaterialAnimation.dropDownTransitionDuration
                 easing.type: Easing.InOutQuad
             }
         }
