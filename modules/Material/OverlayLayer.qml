@@ -16,7 +16,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 2.0
-import Material 0.1
 
 /*!
    \qmltype OverlayLayer
@@ -30,42 +29,59 @@ Rectangle {
 
     anchors.fill: parent
 
+    property var overlayStack: []
+    property int overlayCount
     property Item currentOverlay
     color: "transparent"
+
+    onCurrentOverlayChanged: {
+        if(currentOverlay) {
+            if( (overlayStack.length==0) || (currentOverlay != overlayStack[overlayStack.length-1]) ) {
+                overlayStack.push(currentOverlay);
+                if(overlayStack.length>1) {
+                    overlayStack[overlayStack.length-2].enabled = false;
+                }
+            }
+        } else {
+            if(overlayStack.length) {
+                overlayStack.pop();
+            }
+
+            if(overlayStack.length==0) {
+                currentOverlay = null;
+            } else {
+                currentOverlay = overlayStack[overlayStack.length-1];
+                currentOverlay.enabled = true;
+            }
+        }
+        overlayCount = overlayStack.length
+    }
 
     onEnabledChanged: {
         if (!enabled && overlayLayer.currentOverlay != null)
             overlayLayer.currentOverlay.close()
     }
 
-    onWidthChanged: closeIfNecessary()
-    onHeightChanged: closeIfNecessary()
-
     states: State {
         name: "ShowState"
-        when: overlayLayer.currentOverlay != null
+        when: overlayLayer.overlayCount != 0
 
         PropertyChanges {
             target: overlayLayer
-            color: currentOverlay.overlayColor
+            color: currentOverlay ? currentOverlay.overlayColor : color
         }
     }
 
     transitions: Transition {
         ColorAnimation {
-            duration: MaterialAnimation.overlayLayerTransitionDuration
+            duration: 300
             easing.type: Easing.InOutQuad
         }
     }
 
-    function closeIfNecessary() {
-        if (overlayLayer.currentOverlay != null && overlayLayer.currentOverlay.closeOnResize)
-            overlayLayer.currentOverlay.close()
-    }
-
     MouseArea {
         anchors.fill: parent
-        enabled: overlayLayer.currentOverlay != null && 
+        enabled: overlayLayer.overlayCount != 0 && overlayLayer.currentOverlay &&
                 overlayLayer.currentOverlay.globalMouseAreaEnabled
         hoverEnabled: enabled
 
@@ -74,6 +90,6 @@ Rectangle {
         onClicked: {
             if (overlayLayer.currentOverlay.dismissOnTap)
                 overlayLayer.currentOverlay.close()
-        }        
+        }
     }
 }
